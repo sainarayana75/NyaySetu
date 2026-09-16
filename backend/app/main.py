@@ -3,7 +3,6 @@ from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
-
 from app.config import settings
 from app.database import engine, Base
 from app.routers import (
@@ -63,19 +62,25 @@ app.include_router(compare.router, prefix=settings.API_V1_STR)
 app.include_router(legal_info.router, prefix=settings.API_V1_STR)
 app.include_router(lawyer_prep.router, prefix=settings.API_V1_STR)
 
-# Static Files & SPA Fallback serving for Production Container
-STATIC_DIR = os.path.join(os.path.dirname(__file__), "static")
-if os.path.exists(STATIC_DIR):
-    app.mount("/assets", StaticFiles(directory=os.path.join(STATIC_DIR, "assets")), name="assets")
+@app.get("/api/v1/health")
+def health_check():
+    return {"status": "ok", "service": "NyaySetu Core API"}
+
+# Mount Static Frontend if built in production container
+frontend_dist = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static_frontend")
+if os.path.exists(frontend_dist):
+    assets_dir = os.path.join(frontend_dist, "assets")
+    if os.path.exists(assets_dir):
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
 
     @app.get("/{full_path:path}")
-    async def serve_spa(full_path: str):
-        if full_path.startswith("api/") or full_path.startswith("docs") or full_path.startswith("openapi.json"):
-            return JSONResponse(status_code=404, content={"detail": "API endpoint not found"})
-        index_file = os.path.join(STATIC_DIR, "index.html")
-        if os.path.exists(index_file):
-            return FileResponse(index_file)
-        return JSONResponse(status_code=404, content={"detail": "Static frontend not found"})
+    async def serve_frontend(full_path: str):
+        if full_path.startswith("api") or full_path.startswith("docs") or full_path.startswith("openapi.json"):
+            return JSONResponse(status_code=404, content={"detail": "Not found"})
+        file_path = os.path.join(frontend_dist, full_path)
+        if os.path.exists(file_path) and os.path.isfile(file_path):
+            return FileResponse(file_path)
+        return FileResponse(os.path.join(frontend_dist, "index.html"))
 else:
     @app.get("/")
     def root():
@@ -86,7 +91,3 @@ else:
             "status": "healthy",
             "docs_url": "/docs"
         }
-
-@app.get("/api/v1/health")
-def health_check():
-    return {"status": "ok", "service": "NyaySetu Core API"}
