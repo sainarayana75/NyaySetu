@@ -1,6 +1,6 @@
 # Automated Google Cloud Run Deployment for NyaySetu
 Write-Host "=================================================" -ForegroundColor Cyan
-Write-Host " Deploying NyaySetu to Google Cloud Run          " -ForegroundColor Gold
+Write-Host " Deploying NyaySetu to Google Cloud Run          " -ForegroundColor Yellow
 Write-Host " Project: My Project 70303 (mythic-producer-508813-q3)" -ForegroundColor Green
 Write-Host "=================================================" -ForegroundColor Cyan
 

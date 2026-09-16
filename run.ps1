@@ -1,9 +1,8 @@
 # NyaySetu Dual Server Launcher
 Write-Host "=========================================" -ForegroundColor Cyan
-Write-Host " Starting NyaySetu Platform & Backend " -ForegroundColor Gold
+Write-Host " Starting NyaySetu Platform & Backend " -ForegroundColor Yellow
 Write-Host "=========================================" -ForegroundColor Cyan
 
-$PYTHONPATH = "$PDK_DIR;backend"
 $env:PYTHONPATH = "backend"
 
 # Start FastAPI Backend on Port 8000

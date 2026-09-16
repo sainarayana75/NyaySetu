@@ -4,7 +4,7 @@ param (
 )
 
 Write-Host "=================================================" -ForegroundColor Cyan
-Write-Host " Building & Deploying NyaySetu to Firebase       " -ForegroundColor Gold
+Write-Host " Building & Deploying NyaySetu to Firebase       " -ForegroundColor Yellow
 Write-Host " Project: $ProjectId                             " -ForegroundColor Green
 Write-Host "=================================================" -ForegroundColor Cyan
 
@@ -18,4 +18,4 @@ Set-Location "$PSScriptRoot"
 Write-Host "Deploying assets & API rewrites to Firebase Hosting..." -ForegroundColor Yellow
 npx.cmd -y firebase-tools deploy --project $ProjectId
 
-Write-Host "Firebase Deployment Complete!" -ForegroundColor Green
+Write-Host "Firebase Deployment Process Complete!" -ForegroundColor Green
