@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scale, Globe, Moon, Sun, FileText, GitCompare, HelpCircle, UserCheck, Search, ShieldCheck } from 'lucide-react';
+import { Scale, Globe, Moon, Sun, FileText, GitCompare, HelpCircle, UserCheck, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
   currentTab: string;
@@ -22,15 +22,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const navItems = [
     { id: 'landing', label: 'Home', icon: Scale },
-    { id: 'workspace', label: 'Workspace', icon: FileText },
-    { id: 'clarity_map', label: 'Clarity Map', icon: Search },
-    { id: 'clauses', label: 'Clauses', icon: ShieldCheck },
-    { id: 'obligations', label: 'Obligations', icon: UserCheck },
+    { id: 'workspace', label: 'Overview', icon: FileText },
+    { id: 'clauses', label: 'Understand Simply', icon: ShieldCheck },
+    { id: 'obligations', label: 'Your Obligations', icon: UserCheck },
     { id: 'ask', label: 'Ask Document', icon: HelpCircle },
-    { id: 'next_steps', label: 'Next Steps', icon: HelpCircle },
-    { id: 'compare', label: 'Compare', icon: GitCompare },
-    { id: 'knowledge', label: 'Legal Knowledge', icon: Globe },
-    { id: 'lawyer_prep', label: 'Lawyer Prep', icon: FileText },
+    { id: 'next_steps', label: 'What to Prepare', icon: HelpCircle },
+    { id: 'compare', label: 'Compare Versions', icon: GitCompare },
+    { id: 'knowledge', label: 'Indian Legal Context', icon: Globe },
+    { id: 'lawyer_prep', label: 'Lawyer Consultation Prep', icon: FileText },
   ];
 
   return (

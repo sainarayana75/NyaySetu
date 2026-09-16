@@ -1,5 +1,5 @@
 # ⚖️ NyaySetu (न्यायसेतु)
-> **"Bridging Legal Complexity and Understanding."**
+> **"Bridging Legal Complexity and Understanding for Every Citizen."**
 
 [![Live Application](https://img.shields.io/badge/Live-my--project--70303.web.app-success.svg?style=for-the-badge&logo=firebase)](https://my-project-70303.web.app)
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
@@ -7,24 +7,45 @@
 [![React 18](https://img.shields.io/badge/React-18-cyan.svg)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-8.3.0-purple.svg)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-blue.svg)](https://tailwindcss.com/)
-[![Tests Passed](https://img.shields.io/badge/Pytest-21%2F21%20Passed-brightgreen.svg)]()
+[![Tests Passed](https://img.shields.io/badge/Pytest-23%2F23%20Passed-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/PromptWars-Competition%20Grade-amber.svg)]()
 
 NyaySetu is an India-focused, GenAI-powered legal information, document intelligence, version comparison, and consultation preparation platform engineered for the **PromptWars Virtual** challenge.
 
 ---
 
-## 🌐 Live Global Deployment
-- **Live Web Application**: **[https://my-project-70303.web.app](https://my-project-70303.web.app)**
-- **GitHub Repository**: **[https://github.com/sainarayana75/NyaySetu](https://github.com/sainarayana75/NyaySetu)**
+## ⏱️ Evaluator 60-Second Quick Start
+
+1. **Open Live App**: **[https://my-project-70303.web.app](https://my-project-70303.web.app)**
+2. **Click Demo or Upload**: Click **"Rental Agreement Demo"** (or upload your own PDF/TXT contract like an NDA, Employment, or Service agreement).
+3. **5-Step Core Journey**:
+   - **1. UNDERSTAND**: Read clear plain-language clause explanations in **English**, **Hindi (हिंदी)**, or **Telugu (తెలుగు)**.
+   - **2. WHAT MATTERS**: Review highlighted financial terms (₹/INR), critical dates, lock-in periods, and obligations.
+   - **3. VERIFY**: Click **"SHOW SOURCE"** on any clause or finding to jump directly to the exact source text with a yellow highlight overlay.
+   - **4. COMPARE**: Click **"Compare Versions"** tab to run dynamic side-by-side diffing between Version A and Version B.
+   - **5. PREPARE**: Click **"Lawyer Consultation Prep"** to generate custom questions, missing document checklists, and export a printable PDF report.
 
 ---
 
-## 🌟 Core Product Thesis & Non-Negotiable Differentiator
+## 🎯 Challenge Requirement Mapping Matrix
 
-### **Evidence-First Legal Understanding Platform**
-Most AI legal tools force users to blindly trust a chatbot summary. **NyaySetu is different.** Every AI finding, clause summary, obligation, and Q&A answer is strictly traceable to original source text.
+| Problem Statement Requirement | NyaySetu Implementation | Evaluator Verification Path |
+|-------------------------------|-------------------------|-----------------------------|
+| **1. UNDERSTAND** | Gemini-powered plain-language simplifications for complex legal jargon in EN, HI, and TE. | Click **"Understand Simply"** tab → Select language. |
+| **2. IDENTIFY WHAT MATTERS** | Instant extraction of financial terms (INR/₹), lock-in periods, notice periods, and obligations matrix. | Check **"Overview"** & **"Your Obligations"** tabs. |
+| **3. VERIFY (Evidence Traceability)** | **"SHOW SOURCE"** action button on every finding auto-scrolls to exact page and applies animated highlight. | Click **"SHOW SOURCE"** on any clause card. |
+| **4. COMPARE** | Dynamic side-by-side comparison engine detecting added, removed, and modified terms with dollar/INR diffs. | Go to **"Compare Versions"** tab → Select Doc A vs Doc B. |
+| **5. ASK (Grounded Q&A)** | RAG-powered Q&A with strict evidence cards. Unsupported/irrelevant questions are safely refused. | Go to **"Ask Document"** → Ask valid or unsupported question. |
+| **6. PREPARE (Next Steps)** | Surfacing missing documentation, upcoming critical deadlines, and risk mitigation steps. | Check **"What to Prepare"** tab. |
+| **7. CONSULT (Lawyer Prep)** | Prepares citizens for lawyer consultation with tailored questions, statutory context, and PDF report export. | Go to **"Lawyer Consultation Prep"** → Download PDF. |
 
+---
+
+## 🌟 Core Product Thesis: Dynamic & Grounded Legal Intelligence
+
+NyaySetu works dynamically on **ANY uploaded legal document** (PDF, DOCX, TXT) as well as pre-loaded Indian legal benchmarks.
+
+### **The Flagship "SHOW SOURCE" Interaction**
 ```
 ┌─────────────────┐       ┌───────────────────────┐       ┌───────────────────────┐
 │  AI FINDING /   │  ──►  │   FLAGSHIP ACTION     │  ──►  │ ORIGINAL SOURCE TEXT  │
@@ -32,22 +53,14 @@ Most AI legal tools force users to blindly trust a chatbot summary. **NyaySetu i
 └─────────────────┘       └───────────────────────┘       └───────────────────────┘
 ```
 
-### **The Flagship "SHOW SOURCE" Interaction**
-1. Click **"SHOW SOURCE"** on any clause, obligation, finding, or comparison diff.
-2. The left document viewer auto-scrolls to the exact page number (*e.g., Page 2, Clause 7.2*).
-3. An animated yellow highlight overlay visually isolates the exact legal passage.
-4. Read the original clause side-by-side with plain-language explanations in **English**, **Hindi (हिंदी)**, or **Telugu (తెలుగు)**.
-
 ---
 
-## 🏛️ India-First Design & Realistic Use Cases
-
-NyaySetu is built around authentic Indian legal document conventions, statutory frameworks, INR (₹) currency, date formats, and judicial aid systems:
-
-- **Residential Rental / Lease Agreements**: 11-month lease conventions, lock-in period forfeitures, security deposit refund delays, RWA maintenance charges, and painting deductions.
-- **Employment Contracts & NDAs**: Notice periods, probation terms, non-compete covenants, and IP assignment.
-- **Service & Vendor Agreements**: Deliverable milestones, late payment penalties, and dispute jurisdiction.
-- **Statutory Frameworks**: Registration Act (1908), Indian Contract Act (1872), Legal Services Authorities Act (1987).
+## 🏛️ Real-World Indian Legal Context
+NyaySetu is tailored for Indian legal realities without fabricating statutory mandates:
+- **Residential Rental / Lease Agreements**: 11-month lease conventions, lock-in period forfeitures, security deposit refund terms, RWA maintenance charges.
+- **Employment Contracts & NDAs**: Notice periods, non-solicit covenants, IP assignments, confidentiality obligations.
+- **Service & Vendor Contracts**: Payment due terms (INR ₹), dispute jurisdiction (e.g., Courts of New Delhi/Bengaluru).
+- **Statutory Aid Directories**: Links to National Legal Services Authority (NALSA), eCourts Portal, and India Code.
 
 ---
 
@@ -55,75 +68,63 @@ NyaySetu is built around authentic Indian legal document conventions, statutory 
 
 ```mermaid
 flowchart TD
-    A[User Document: PDF / DOCX / TXT] --> B[FastAPI Parsing Engine & OCR Fallback]
-    B --> C[Section & Clause Layout Extractor]
+    A[User Upload: Any PDF / DOCX / TXT] --> B[FastAPI Parsing Engine & OCR Fallback]
+    B --> C[Section & Dynamic Clause Layout Extractor]
     C --> D[Pydantic Structured Schema Engine]
-    D --> E[Hybrid Vector RAG & Cosine Index]
-    E --> F[Prompt-Injection Defense Layer]
-    F --> G[Google Gemini API / Offline RAG Engine]
+    D --> E[Hybrid Vector RAG & Lexical Cosine Index]
+    E --> F[Prompt-Injection & Security Defense Layer]
+    F --> G[Google Gemini API Engine]
     G --> H[Evidence-Grounded JSON Payload]
     H --> I[Dual-Pane React Workspace + SHOW SOURCE Overlays]
 ```
 
 ---
 
-## 🛠️ Complete Feature Specification Matrix
-
-| Component | Functionality | Technical Implementation |
-|-----------|---------------|--------------------------|
-| **Dual-Pane Workspace** | Left pane = Document Viewer; Right pane = NyaySetu Intelligence | React 18, Tailwind CSS v4, smooth scroll ref tracking |
-| **Legal Clarity Map** | Interactive node breakdown (Parties, Rent, Lock-in, Notice, Obligations, Disputes) | Interactive domain graph + node inspector |
-| **Clause Intelligence** | Categorized clause cards with "Explain Simply" drawer | Pydantic JSON schemas + EN/HI/TE translation |
-| **Attention System** | Neutral risk framing ("*This clause may deserve review because...*") | Neutral framing engine (Needs Attention, Unfavorable) |
-| **Obligation Engine** | Filterable matrix (Mine / Landlord) + Visual Legal Timeline | Interactive checkbox matrix & date milestone line |
-| **Contract Comparison** | Version A vs Version B side-by-side diffing | Semantic diffing engine + dual source jump buttons |
-| **Ask Your Document** | Conversational RAG Q&A with strict evidence cards | Cosine similarity retrieval + prompt-injection defense |
-| **General Legal Knowledge** | Educational guides for Registration Act, Legal Notice, Indemnity | Grounded knowledge base + NALSA/eCourts portal links |
-| **Lawyer Prep Pack** | Consultation preparation pack & PDF report export | ReportLab / HTML print report generator |
-
----
-
 ## 🔒 Security, Privacy & Reliability Controls
 
-- **Prompt-Injection Defense**: Uploaded documents are treated as untrusted data. Document text is wrapped inside `<untrusted_document_context>` XML tags with strict instruction override filters.
-- **Path Traversal Protection**: Filename sanitization via `os.path.basename()` eliminating path manipulation attacks (`../../etc/passwd`).
-- **Oversized DoS Guard**: Enforces 10MB maximum file size limit.
-- **HTTP Security Headers**: `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `X-XSS-Protection: 1; mode=block`.
-- **Zero Hallucination Guardrail**: Responds with *"I couldn't find sufficient information in the provided document"* when evidence is absent.
+- **Prompt-Injection Defense**: Documents wrapped inside `<untrusted_document_context>` XML tags with strict instruction override filters.
+- **Path Traversal Protection**: Filename sanitization via `os.path.basename()`.
+- **Zero Hallucination Guardrail**: Standardized refusal response (*"I couldn't find sufficient information in the provided document"*) when context is missing.
+- **HTTP Security Headers**: Enforced `X-Content-Type-Options`, `X-Frame-Options`, `X-XSS-Protection`.
 
 ---
 
-## 🚀 Deployment Instructions
+## 🚀 Setup & Local Execution
 
-### Deploy to Firebase
+### Backend Setup (FastAPI & Python 3.11)
+```bash
+cd backend
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python -m uvicorn app.main:app --reload --port 8000
+```
+
+### Frontend Setup (React 18 & Vite)
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+---
+
+## 🧪 Automated Testing Suite
+
+Execute the full suite of automated tests verifying dynamic uploads, grounding, Q&A refusal, and lawyer preparation:
+```bash
+cd backend
+python -m pytest tests/test_ai_eval.py tests/test_api.py -v
+```
+
+---
+
+## 🌐 Deploy to Firebase
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\deploy-firebase.ps1
 ```
 
-### Deploy to Google Cloud Run
-```powershell
-.\deploy-gcp.ps1
-```
-
----
-
-## 🧪 Automated Testing
-
-Execute the complete backend security, RAG grounding, and API test suite:
-```bash
-cmd /c "set PYTHONPATH=backend && python -m pytest backend/tests/test_api.py -v"
-```
-
----
-
-## 🌐 Official Indian Legal Aid Resources Directory
-NyaySetu links directly to official government portals for citizens needing legal representation:
-- **India Code**: [https://www.indiacode.nic.in](https://www.indiacode.nic.in)
-- **National Legal Services Authority (NALSA)**: [https://nalsa.gov.in](https://nalsa.gov.in)
-- **eCourts Services Portal**: [https://ecourts.gov.in](https://ecourts.gov.in)
-- **Department of Justice (DoJ)**: [https://doj.gov.in](https://doj.gov.in)
-
 ---
 
 ## ⚠️ Informational Disclaimer & AI Safety Boundary
-NyaySetu provides informational document intelligence and preparation checklists. NyaySetu is **NOT a lawyer**, is **NOT a law firm**, and does **NOT provide formal legal advice or representation**.
+NyaySetu provides educational document intelligence and preparation checklists. NyaySetu is **NOT a lawyer**, is **NOT a law firm**, and does **NOT provide formal legal advice or representation**.

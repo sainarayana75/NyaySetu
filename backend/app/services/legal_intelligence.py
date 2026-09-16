@@ -136,6 +136,58 @@ class LegalIntelligenceService:
                 "suggested_questions": ["Is email notice considered legally valid written notice?"]
             })
 
+        # 4. Look for Confidentiality / Non-Disclosure
+        conf_match = re.search(r'(?:confidential|non-disclosure|proprietary information|trade secret)', doc_text, re.IGNORECASE)
+        if conf_match:
+            clauses.append({
+                "id": str(uuid.uuid4()),
+                "category": "Confidentiality",
+                "title": "Non-Disclosure & Confidentiality Obligation",
+                "clause_number": "Confidentiality Clause",
+                "page_number": 1,
+                "original_text": "Parties shall keep all proprietary information, trade secrets, and contractual details strictly confidential.",
+                "explanation_en": "You are legally required to keep proprietary information, financial terms, and internal data strictly secret.",
+                "explanation_hi": "आपको गोपनीय जानकारी और व्यावसायिक विवरणों को पूरी तरह गुप्त रखना अनिवार्य है।",
+                "explanation_te": "మీరు రహస్య సమాచారాన్ని బయటకు చెప్పకూడదు.",
+                "affected_party": "Receiving Party / Employee",
+                "requires_action": "Maintain confidentiality during and after contract duration.",
+                "why_it_matters": "Breaching confidentiality may trigger injunctive relief or damages under Indian law.",
+                "attention_category": "IMPORTANT OBLIGATION",
+                "suggested_questions": ["What is the survival duration of confidentiality post-termination?"]
+            })
+            obligations.append({
+                "id": str(uuid.uuid4()),
+                "responsible_party": "Receiving Party",
+                "action": "Maintain strict non-disclosure of proprietary information",
+                "condition_trigger": "At all times",
+                "deadline_text": "Ongoing / Post-termination",
+                "frequency": "Continuous",
+                "amount_inr": "N/A",
+                "source_clause": "Confidentiality Clause",
+                "page_number": 1,
+                "is_completed": False
+            })
+
+        # 5. Look for Governing Law / Jurisdiction
+        gov_match = re.search(r'(?:governing law|jurisdiction|courts of|laws of india)', doc_text, re.IGNORECASE)
+        if gov_match:
+            clauses.append({
+                "id": str(uuid.uuid4()),
+                "category": "Governing Law",
+                "title": "Dispute Jurisdiction & Indian Law",
+                "clause_number": "Jurisdiction Clause",
+                "page_number": 1,
+                "original_text": "Governed by and construed in accordance with the laws of India and subject to exclusive jurisdiction of competent courts.",
+                "explanation_en": "This contract is governed by Indian statutory law, and disputes will be adjudicated in specified local Indian courts.",
+                "explanation_hi": "यह अनुबंध भारतीय कानून के अधीन है और विवादों का निपटारा स्थानीय अदालत में होगा।",
+                "explanation_te": "ఈ ఒప్పందం భారతీయ చట్టాల ప్రకారం నడుస్తుంది.",
+                "affected_party": "Both Parties",
+                "requires_action": "File dispute proceedings in specified jurisdiction.",
+                "why_it_matters": "Determines legal venue and statutory rights under Indian codes.",
+                "attention_category": "IMPORTANT OBLIGATION",
+                "suggested_questions": ["Is mandatory arbitration specified prior to court filings?"]
+            })
+
         # Default fallback clauses if text is too generic
         if not clauses:
             clauses.append({

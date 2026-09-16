@@ -59,27 +59,32 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </button>
           </div>
 
-          {/* Key Value Badges */}
-          <div className="pt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
+          {/* Key Outcome Steps */}
+          <div className="pt-8 grid grid-cols-2 md:grid-cols-5 gap-3 max-w-5xl mx-auto text-left">
             <div className="bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl">
               <ShieldCheck className="w-5 h-5 text-emerald-400 mb-1" />
-              <div className="font-semibold text-xs text-white">Evidence-First</div>
-              <div className="text-[11px] text-slate-400">Traceable to exact page & clause</div>
+              <div className="font-semibold text-xs text-white uppercase">1. UNDERSTAND</div>
+              <div className="text-[11px] text-slate-400">Plain-language explanations in EN/HI/TE</div>
             </div>
             <div className="bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl">
               <Search className="w-5 h-5 text-blue-400 mb-1" />
-              <div className="font-semibold text-xs text-white">Legal Clarity Map</div>
-              <div className="text-[11px] text-slate-400">Interactive node breakdown</div>
-            </div>
-            <div className="bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl">
-              <UserCheck className="w-5 h-5 text-indigo-400 mb-1" />
-              <div className="font-semibold text-xs text-white">Obligation Engine</div>
-              <div className="text-[11px] text-slate-400">Party, action & date matrix</div>
+              <div className="font-semibold text-xs text-white uppercase">2. WHAT MATTERS</div>
+              <div className="text-[11px] text-slate-400">Clauses, obligations & critical dates</div>
             </div>
             <div className="bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl">
               <Lock className="w-5 h-5 text-amber-400 mb-1" />
-              <div className="font-semibold text-xs text-white">Multilingual EN/HI/TE</div>
-              <div className="text-[11px] text-slate-400">English, हिंदी & తెలుగు</div>
+              <div className="font-semibold text-xs text-white uppercase">3. VERIFY</div>
+              <div className="text-[11px] text-slate-400">SHOW SOURCE auto-scroll highlight</div>
+            </div>
+            <div className="bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl">
+              <GitCompare className="w-5 h-5 text-indigo-400 mb-1" />
+              <div className="font-semibold text-xs text-white uppercase">4. COMPARE</div>
+              <div className="text-[11px] text-slate-400">Dynamic diffing of contract versions</div>
+            </div>
+            <div className="bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl">
+              <UserCheck className="w-5 h-5 text-purple-400 mb-1" />
+              <div className="font-semibold text-xs text-white uppercase">5. PREPARE</div>
+              <div className="text-[11px] text-slate-400">Lawyer preparation pack & PDF report</div>
             </div>
           </div>
 

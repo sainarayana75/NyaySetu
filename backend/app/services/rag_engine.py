@@ -94,6 +94,26 @@ class RAGEngineService:
                         "why_it_matters": c.why_it_matters
                     })
 
+        # Dynamic fallback: Search for key query word overlaps in extracted clause text
+        if not best_answer:
+            query_words = [w for w in q_lower.split() if len(w) > 3 and w not in ["what", "where", "when", "which", "this", "that", "there", "about", "with", "does", "have", "from"]]
+            if query_words:
+                matching_clauses = [
+                    c for c in clauses if any(w in c.original_text.lower() or w in c.title.lower() or w in c.explanation_en.lower() for w in query_words)
+                ]
+                if matching_clauses:
+                    best_answer = "Based on extracted terms in your document:\n"
+                    for c in matching_clauses[:3]:
+                        best_answer += f"• **{c.title}**: {c.explanation_en}\n"
+                        matched_sources.append({
+                            "document_id": c.document_id,
+                            "page_number": c.page_number,
+                            "section": c.category,
+                            "clause": c.clause_number,
+                            "source_text": c.original_text,
+                            "why_it_matters": c.why_it_matters
+                        })
+
         # Fallback if no matching clauses found
         if not best_answer:
             return {
