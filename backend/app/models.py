@@ -91,6 +91,8 @@ class Finding(Base):
     clause_ref = Column(String, nullable=True)
     why_review = Column(Text)
     question_to_ask = Column(Text, nullable=True)
+    clause_a_id = Column(String, nullable=True)
+    clause_b_id = Column(String, nullable=True)
 
     document = relationship("Document", back_populates="findings")
 

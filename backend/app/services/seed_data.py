@@ -193,7 +193,9 @@ def get_demo_documents_data() -> List[Dict[str, Any]]:
                     "page_number": 2,
                     "clause_ref": "Clause 3.2",
                     "why_review": "Consider asking for a replacement clause (e.g. finding a replacement tenant) instead of total deposit loss.",
-                    "question_to_ask": "Could we amend Clause 3.2 to allow early exit if a replacement tenant is arranged?"
+                    "question_to_ask": "Could we amend Clause 3.2 to allow early exit if a replacement tenant is arranged?",
+                    "clause_a_id": "cl-3",
+                    "clause_b_id": "cl-4"
                 },
                 {
                     "id": "find-2",
@@ -204,7 +206,22 @@ def get_demo_documents_data() -> List[Dict[str, Any]]:
                     "page_number": 2,
                     "clause_ref": "Clause 7.2",
                     "why_review": "If stay is short (e.g., 6-11 months), paying full painting cost may be negotiated down to a pro-rata rate.",
-                    "question_to_ask": "Can painting deduction be reduced if tenant maintains walls cleanly?"
+                    "question_to_ask": "Can painting deduction be reduced if tenant maintains walls cleanly?",
+                    "clause_a_id": "cl-2",
+                    "clause_b_id": "cl-1"
+                },
+                {
+                    "id": "find-3",
+                    "category": "POTENTIAL INCONSISTENCY",
+                    "title": "Conflicting Termination Terms (Lock-in vs Notice Period)",
+                    "explanation": "Clause 3.2 strictly prohibits exit during the 6-month lock-in period under pain of full deposit forfeiture, whereas Clause 4.1 broadly states that either party may terminate by serving 30 days notice or 1 month rent in lieu without explicitly stating it only applies post-lockin.",
+                    "source_text": "Clause 3.2: Lock-in Period of 6 months... vs Clause 4.1: Either party may terminate by serving 30 days prior written notice...",
+                    "page_number": 2,
+                    "clause_ref": "Clause 3.2 & Clause 4.1",
+                    "why_review": "Two sections appear to describe different notice/exit rules during the initial months. Reviewing both clauses helps clarify which requirement applies.",
+                    "question_to_ask": "Does the 30-day notice option in Clause 4.1 override the lock-in forfeiture in Clause 3.2?",
+                    "clause_a_id": "cl-3",
+                    "clause_b_id": "cl-4"
                 }
             ],
             "obligations": [

@@ -15,6 +15,7 @@ export const ClauseIntelligence: React.FC<ClauseIntelligenceProps> = ({
 }) => {
   const [selectedClauseForExplain, setSelectedClauseForExplain] = useState<Clause | null>(null);
   const [filterCategory, setFilterCategory] = useState<string>('ALL');
+  const [viewMode, setViewMode] = useState<'cards' | 'side_by_side'>('cards');
 
   const categories = ['ALL', ...Array.from(new Set(clauses.map(c => c.category)))];
 
@@ -25,7 +26,7 @@ export const ClauseIntelligence: React.FC<ClauseIntelligenceProps> = ({
   return (
     <div className="space-y-6">
       
-      {/* Header & Category Filters */}
+      {/* Header & View Mode Switcher */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 gap-3">
         <div>
           <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center space-x-2">
@@ -37,82 +38,169 @@ export const ClauseIntelligence: React.FC<ClauseIntelligenceProps> = ({
           </p>
         </div>
 
-        {/* Category Pill Filters */}
-        <div className="flex items-center space-x-1 overflow-x-auto py-1">
-          {categories.map((cat) => (
+        <div className="flex items-center space-x-2">
+          {/* Mode Switcher */}
+          <div className="bg-slate-100 dark:bg-slate-800 p-1 rounded-xl flex items-center text-xs font-semibold">
             <button
-              key={cat}
-              onClick={() => setFilterCategory(cat)}
-              className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
-                filterCategory === cat
-                  ? 'bg-blue-600 text-white shadow-xs'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200'
-              }`}
+              onClick={() => setViewMode('cards')}
+              className={`px-3 py-1 rounded-lg transition-all ${viewMode === 'cards' ? 'bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-xs' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}`}
             >
-              {cat}
+              Standard Cards
             </button>
-          ))}
+            <button
+              onClick={() => setViewMode('side_by_side')}
+              className={`px-3 py-1 rounded-lg transition-all ${viewMode === 'side_by_side' ? 'bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-xs' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}`}
+            >
+              Original vs Plain Language
+            </button>
+          </div>
+
+          {/* Category Pill Filters */}
+          <div className="flex items-center space-x-1 overflow-x-auto py-1">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setFilterCategory(cat)}
+                className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                  filterCategory === cat
+                    ? 'bg-blue-600 text-white shadow-xs'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Clause Cards Grid */}
-      <div className="grid grid-cols-1 gap-4">
-        {filteredClauses.map((clause) => {
-          const explanation = language === 'hi' && clause.explanation_hi
-            ? clause.explanation_hi
-            : language === 'te' && clause.explanation_te
-            ? clause.explanation_te
-            : clause.explanation_en;
+      {/* Clause Grid / Side-by-Side Comparison View */}
+      {viewMode === 'side_by_side' ? (
+        <div className="space-y-6">
+          <div className="bg-blue-50 dark:bg-blue-950/40 p-3.5 rounded-xl border border-blue-200 dark:border-blue-900 text-xs text-blue-900 dark:text-blue-200 flex items-center justify-between">
+            <span className="font-semibold">Side-by-Side Comparison View: Comparing ORIGINAL verbatim contract text vs AI-analyzed PLAIN LANGUAGE.</span>
+            <span className="text-[10px] font-bold bg-blue-200 dark:bg-blue-900 text-blue-800 dark:text-blue-100 px-2 py-0.5 rounded">ORIGINAL vs PLAIN LANGUAGE</span>
+          </div>
 
-          return (
-            <div key={clause.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-xs space-y-4 hover:shadow-md transition-all">
-              
-              <div className="flex items-start justify-between gap-3">
-                <div className="space-y-1">
-                  <div className="flex items-center space-x-2 flex-wrap gap-y-1">
-                    <span className="text-[10px] font-extrabold uppercase bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 px-2 py-0.5 rounded">
-                      {clause.category}
-                    </span>
-                    <span className="text-xs text-slate-400 font-medium">Page {clause.page_number}</span>
-                    <span className="text-xs text-slate-400 font-medium">• {clause.clause_number}</span>
+          <div className="space-y-4">
+            {filteredClauses.map((clause) => {
+              const explanation = language === 'hi' && clause.explanation_hi
+                ? clause.explanation_hi
+                : language === 'te' && clause.explanation_te
+                ? clause.explanation_te
+                : clause.explanation_en;
+
+              return (
+                <div key={clause.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-xs space-y-3">
+                  <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-[10px] font-extrabold uppercase bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 px-2 py-0.5 rounded">
+                        {clause.category}
+                      </span>
+                      <h3 className="font-bold text-sm text-slate-900 dark:text-white">{clause.title}</h3>
+                    </div>
+                    <button
+                      onClick={() => onShowSource(clause.page_number, clause.original_text)}
+                      className="flex items-center space-x-1 text-xs font-bold text-amber-700 dark:text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 px-2.5 py-1 rounded-lg"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>SHOW SOURCE</span>
+                    </button>
                   </div>
-                  <h3 className="font-bold text-base text-slate-900 dark:text-white">{clause.title}</h3>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* ORIGINAL COLUMN */}
+                    <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2">
+                      <div className="flex items-center justify-between text-[11px] font-bold text-slate-500 uppercase">
+                        <span>ORIGINAL LEGAL TEXT</span>
+                        <span>Page {clause.page_number}</span>
+                      </div>
+                      <p className="font-mono text-xs text-slate-800 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+                        "{clause.original_text}"
+                      </p>
+                    </div>
+
+                    {/* PLAIN LANGUAGE COLUMN */}
+                    <div className="bg-blue-50/50 dark:bg-blue-950/30 p-4 rounded-xl border border-blue-200/80 dark:border-blue-900/60 space-y-2">
+                      <div className="flex items-center justify-between text-[11px] font-bold text-blue-600 dark:text-blue-400 uppercase">
+                        <span>PLAIN LANGUAGE ({language.toUpperCase()})</span>
+                        <span className="text-[10px] bg-blue-100 dark:bg-blue-900 px-1.5 py-0.5 rounded font-bold">SIMPLIFIED</span>
+                      </div>
+                      <p className="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed">
+                        {explanation}
+                      </p>
+                      {clause.why_it_matters && (
+                        <div className="pt-2 border-t border-blue-200/60 dark:border-blue-900/40 text-[11px] text-amber-800 dark:text-amber-300">
+                          <strong>Why It Matters:</strong> {clause.why_it_matters}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : (
+        /* Clause Cards Grid */
+        <div className="grid grid-cols-1 gap-4">
+          {filteredClauses.map((clause) => {
+            const explanation = language === 'hi' && clause.explanation_hi
+              ? clause.explanation_hi
+              : language === 'te' && clause.explanation_te
+              ? clause.explanation_te
+              : clause.explanation_en;
+
+            return (
+              <div key={clause.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-xs space-y-4 hover:shadow-md transition-all">
+                
+                <div className="flex items-start justify-between gap-3">
+                  <div className="space-y-1">
+                    <div className="flex items-center space-x-2 flex-wrap gap-y-1">
+                      <span className="text-[10px] font-extrabold uppercase bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 px-2 py-0.5 rounded">
+                        {clause.category}
+                      </span>
+                      <span className="text-xs text-slate-400 font-medium">Page {clause.page_number}</span>
+                      <span className="text-xs text-slate-400 font-medium">• {clause.clause_number}</span>
+                    </div>
+                    <h3 className="font-bold text-base text-slate-900 dark:text-white">{clause.title}</h3>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <button
+                      onClick={() => setSelectedClauseForExplain(clause)}
+                      className="flex items-center space-x-1 text-xs font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 border border-blue-200 dark:border-blue-900 px-3 py-1.5 rounded-lg transition-all"
+                    >
+                      <HelpCircle className="w-3.5 h-3.5" />
+                      <span>Explain Simply</span>
+                    </button>
+
+                    <button
+                      onClick={() => onShowSource(clause.page_number, clause.original_text)}
+                      className="flex items-center space-x-1 text-xs font-bold text-amber-700 dark:text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 px-3 py-1.5 rounded-lg transition-all"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>SHOW SOURCE</span>
+                    </button>
+                  </div>
                 </div>
 
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => setSelectedClauseForExplain(clause)}
-                    className="flex items-center space-x-1 text-xs font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 border border-blue-200 dark:border-blue-900 px-3 py-1.5 rounded-lg transition-all"
-                  >
-                    <HelpCircle className="w-3.5 h-3.5" />
-                    <span>Explain Simply</span>
-                  </button>
-
-                  <button
-                    onClick={() => onShowSource(clause.page_number, clause.original_text)}
-                    className="flex items-center space-x-1 text-xs font-bold text-amber-700 dark:text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 px-3 py-1.5 rounded-lg transition-all"
-                  >
-                    <Eye className="w-3.5 h-3.5" />
-                    <span>SHOW SOURCE</span>
-                  </button>
+                {/* Plain Language Summary */}
+                <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800 p-3.5 rounded-lg text-xs space-y-1">
+                  <div className="font-bold text-slate-500 dark:text-slate-400 uppercase text-[10px]">Plain Explanation ({language.toUpperCase()}):</div>
+                  <p className="text-slate-800 dark:text-slate-200 font-medium leading-relaxed">{explanation}</p>
                 </div>
-              </div>
 
-              {/* Plain Language Summary */}
-              <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800 p-3.5 rounded-lg text-xs space-y-1">
-                <div className="font-bold text-slate-500 dark:text-slate-400 uppercase text-[10px]">Plain Explanation ({language.toUpperCase()}):</div>
-                <p className="text-slate-800 dark:text-slate-200 font-medium leading-relaxed">{explanation}</p>
-              </div>
+                {/* Original Excerpt */}
+                <div className="text-xs font-mono bg-slate-100 dark:bg-slate-950/60 p-2.5 rounded-md text-slate-600 dark:text-slate-400 truncate">
+                  "{clause.original_text}"
+                </div>
 
-              {/* Original Excerpt */}
-              <div className="text-xs font-mono bg-slate-100 dark:bg-slate-950/60 p-2.5 rounded-md text-slate-600 dark:text-slate-400 truncate">
-                "{clause.original_text}"
               </div>
-
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* "EXPLAIN SIMPLY" Modal */}
       {selectedClauseForExplain && (

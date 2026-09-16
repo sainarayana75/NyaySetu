@@ -1,3 +1,4 @@
+import hashlib
 import json
 import re
 import uuid
@@ -5,7 +6,13 @@ from typing import Dict, List, Any, Optional
 from app.config import settings
 from app.models import Document, Clause, Finding, Obligation, Deadline
 
+_ANALYSIS_CACHE: Dict[str, Dict[str, Any]] = {}
+
 class LegalIntelligenceService:
+    @staticmethod
+    def _compute_hash(doc_text: str, doc_type: str) -> str:
+        return hashlib.sha256(f"{doc_type}:{doc_text}".encode('utf-8')).hexdigest()
+
     @staticmethod
     def analyze_document(doc_text: str, doc_type: str, pages_data: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
@@ -16,14 +23,22 @@ class LegalIntelligenceService:
         - Obligations
         - Deadlines
         """
+        doc_hash = LegalIntelligenceService._compute_hash(doc_text, doc_type)
+        if doc_hash in _ANALYSIS_CACHE:
+            return _ANALYSIS_CACHE[doc_hash]
+
+        result = None
         if settings.GEMINI_API_KEY and len(settings.GEMINI_API_KEY) > 5:
             try:
-                return LegalIntelligenceService._analyze_with_gemini(doc_text, doc_type)
+                result = LegalIntelligenceService._analyze_with_gemini(doc_text, doc_type)
             except Exception as e:
                 print(f"Gemini API analysis fallback: {e}")
 
-        # High-fidelity NLP fallback analyzer
-        return LegalIntelligenceService._analyze_with_nlp_rules(doc_text, doc_type, pages_data)
+        if not result:
+            result = LegalIntelligenceService._analyze_with_nlp_rules(doc_text, doc_type, pages_data)
+
+        _ANALYSIS_CACHE[doc_hash] = result
+        return result
 
     @staticmethod
     def _analyze_with_nlp_rules(doc_text: str, doc_type: str, pages_data: List[Dict[str, Any]]) -> Dict[str, Any]:

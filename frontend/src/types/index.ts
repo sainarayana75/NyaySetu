@@ -57,6 +57,8 @@ export interface Finding {
   clause_ref?: string;
   why_review: string;
   question_to_ask?: string;
+  clause_a_id?: string;
+  clause_b_id?: string;
 }
 
 export interface Obligation {

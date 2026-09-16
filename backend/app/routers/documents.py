@@ -231,7 +231,9 @@ def _ensure_demo_documents_seeded(db: Session):
                 page_number=f_item["page_number"],
                 clause_ref=f_item["clause_ref"],
                 why_review=f_item["why_review"],
-                question_to_ask=f_item.get("question_to_ask")
+                question_to_ask=f_item.get("question_to_ask"),
+                clause_a_id=f_item.get("clause_a_id"),
+                clause_b_id=f_item.get("clause_b_id")
             ))
 
         for o in d_item.get("obligations", []):

@@ -11,6 +11,7 @@ import { AskDocument } from './components/AskDocument';
 import { ContractComparison } from './components/ContractComparison';
 import { LegalKnowledge } from './components/LegalKnowledge';
 import { LawyerPrep } from './components/LawyerPrep';
+import { NextStepsPanel } from './components/NextStepsPanel';
 
 import type {
   DocumentOverview,
@@ -226,6 +227,14 @@ export function App() {
                   documentId={selectedDoc?.id || 'demo-rental-v1'}
                   language={language}
                   onShowSource={handleShowSource}
+                />
+              )}
+
+              {currentTab === 'next_steps' && (
+                <NextStepsPanel
+                  obligations={obligations}
+                  deadlines={deadlines}
+                  onExportPrep={() => setCurrentTab('lawyer_prep')}
                 />
               )}
 

@@ -21,6 +21,8 @@ class FindingSchema(BaseModel):
     clause_ref: Optional[str] = None
     why_review: str
     question_to_ask: Optional[str] = None
+    clause_a_id: Optional[str] = None
+    clause_b_id: Optional[str] = None
 
 class ClauseSchema(BaseModel):
     id: str

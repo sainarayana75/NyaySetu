@@ -35,18 +35,51 @@ export const AttentionSystem: React.FC<AttentionSystemProps> = ({
           <div key={f.id} className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-5 space-y-3 shadow-xs">
             <div className="flex items-start justify-between">
               <div>
-                <span className="text-[10px] font-extrabold uppercase bg-amber-500/20 text-amber-800 dark:text-amber-300 px-2 py-0.5 rounded">
-                  {f.category}
+                <span className="text-[10px] font-extrabold uppercase bg-amber-500/20 text-amber-800 dark:text-amber-300 px-2 py-0.5 rounded flex items-center gap-1">
+                  <span>⚠</span>
+                  <span>{f.category}</span>
                 </span>
                 <h3 className="font-bold text-base text-slate-900 dark:text-white mt-1">{f.title}</h3>
               </div>
-              <button
-                onClick={() => onShowSource(f.page_number, f.source_text)}
-                className="flex items-center space-x-1 text-xs font-bold text-amber-800 dark:text-amber-400 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 px-3 py-1.5 rounded-lg transition-all"
-              >
-                <Eye className="w-3.5 h-3.5" />
-                <span>SHOW SOURCE</span>
-              </button>
+              <div className="flex items-center space-x-2">
+                {f.category === 'POTENTIAL INCONSISTENCY' && f.clause_a_id ? (
+                  <>
+                    <button
+                      onClick={() => {
+                        const ca = clauses.find(c => c.id === f.clause_a_id);
+                        if (ca) onShowSource(ca.page_number, ca.original_text);
+                        else onShowSource(f.page_number, f.source_text);
+                      }}
+                      className="flex items-center space-x-1 text-[11px] font-bold text-amber-800 dark:text-amber-300 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 px-2.5 py-1.5 rounded-lg transition-all"
+                      aria-label="Show Source A for conflicting clause"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>SHOW SOURCE A</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        const cb = clauses.find(c => c.id === f.clause_b_id);
+                        if (cb) onShowSource(cb.page_number, cb.original_text);
+                        else onShowSource(f.page_number, f.source_text);
+                      }}
+                      className="flex items-center space-x-1 text-[11px] font-bold text-blue-800 dark:text-blue-300 bg-blue-500/20 hover:bg-blue-500/30 border border-blue-500/40 px-2.5 py-1.5 rounded-lg transition-all"
+                      aria-label="Show Source B for conflicting clause"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>SHOW SOURCE B</span>
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => onShowSource(f.page_number, f.source_text)}
+                    className="flex items-center space-x-1 text-xs font-bold text-amber-800 dark:text-amber-400 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 px-3 py-1.5 rounded-lg transition-all"
+                    aria-label={`Show source text for ${f.title}`}
+                  >
+                    <Eye className="w-3.5 h-3.5" />
+                    <span>SHOW SOURCE</span>
+                  </button>
+                )}
+              </div>
             </div>
 
             <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">{f.explanation}</p>

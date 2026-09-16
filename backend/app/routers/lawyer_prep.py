@@ -26,6 +26,23 @@ def generate_lawyer_preparation_pack(req: LawyerPrepRequest, db: Session = Depen
     prep = LawyerPrepService.generate_prep_pack(doc, clauses, obs, deadlines, req.user_notes)
     return LawyerPrepResponse(**prep)
 
+@router.get("/lawyer-preparation/{doc_id}", response_model=LawyerPrepResponse)
+def get_lawyer_preparation_pack(doc_id: str, db: Session = Depends(get_db)):
+    """
+    Retrieves structured consultation preparation pack by document ID.
+    """
+    _ensure_demo_documents_seeded(db)
+    doc = db.query(Document).filter(Document.id == doc_id).first()
+    if not doc:
+        raise HTTPException(status_code=404, detail="Document not found.")
+
+    clauses = db.query(Clause).filter(Clause.document_id == doc_id).all()
+    obs = db.query(Obligation).filter(Obligation.document_id == doc_id).all()
+    deadlines = db.query(Deadline).filter(Deadline.document_id == doc_id).all()
+
+    prep = LawyerPrepService.generate_prep_pack(doc, clauses, obs, deadlines)
+    return LawyerPrepResponse(**prep)
+
 @router.get("/lawyer-preparation/{doc_id}/export")
 def export_lawyer_prep_pdf(doc_id: str, db: Session = Depends(get_db)):
     """

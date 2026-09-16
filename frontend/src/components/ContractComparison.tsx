@@ -32,6 +32,8 @@ export const ContractComparison: React.FC<ContractComparisonProps> = ({
     loadDiff();
   }, [docAId, docBId]);
 
+  const [filterType, setFilterType] = useState<string>('ALL');
+
   if (loading) {
     return (
       <div className="text-center py-12 space-y-3">
@@ -50,15 +52,35 @@ export const ContractComparison: React.FC<ContractComparisonProps> = ({
     );
   }
 
+  const filteredChanges = filterType === 'ALL'
+    ? comparison.changes
+    : comparison.changes.filter(c => c.change_type === filterType);
+
   return (
     <div className="space-y-6">
       
       {/* Header */}
       <div className="bg-gradient-to-r from-indigo-900 to-blue-900 text-white p-6 rounded-2xl shadow-md space-y-3">
-        <div className="flex items-center space-x-2">
-          <GitCompare className="w-6 h-6 text-amber-300" />
-          <h2 className="font-bold text-xl">Contract Version Comparison</h2>
+        <div className="flex items-center justify-between flex-wrap gap-3">
+          <div className="flex items-center space-x-2">
+            <GitCompare className="w-6 h-6 text-amber-300" />
+            <h2 className="font-bold text-xl">Contract Version Comparison</h2>
+          </div>
+
+          {/* Filter Chips */}
+          <div className="flex items-center space-x-1.5 bg-indigo-950/80 p-1 rounded-xl border border-indigo-700 text-xs font-semibold">
+            {['ALL', 'MODIFIED', 'ADDED', 'REMOVED', 'UNCHANGED'].map((t) => (
+              <button
+                key={t}
+                onClick={() => setFilterType(t)}
+                className={`px-3 py-1 rounded-lg transition-all ${filterType === t ? 'bg-amber-500 text-slate-950 font-bold shadow-xs' : 'text-indigo-200 hover:text-white'}`}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
         </div>
+
         <p className="text-xs text-indigo-200 leading-relaxed max-w-3xl">
           {comparison.summary}
         </p>
@@ -75,7 +97,7 @@ export const ContractComparison: React.FC<ContractComparisonProps> = ({
 
       {/* Changes List */}
       <div className="space-y-4">
-        {comparison.changes.map((change, idx) => (
+        {filteredChanges.map((change, idx) => (
           <div key={idx} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xs space-y-4">
             
             {/* Title & Badge */}

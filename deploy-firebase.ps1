@@ -1,11 +1,11 @@
 # Automated Firebase Deployment Script for NyaySetu
 param (
-    [string]$ProjectId = "mythic-producer-508813-q3"
+    [string]$ProjectId = "my-project-70303"
 )
 
 Write-Host "=================================================" -ForegroundColor Cyan
 Write-Host " Building & Deploying NyaySetu to Firebase       " -ForegroundColor Yellow
-Write-Host " Project: $ProjectId                             " -ForegroundColor Green
+Write-Host " Project ID: $ProjectId                          " -ForegroundColor Green
 Write-Host "=================================================" -ForegroundColor Cyan
 
 # 1. Build React Frontend Production Bundle

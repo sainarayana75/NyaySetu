@@ -7,7 +7,7 @@
 [![React 18](https://img.shields.io/badge/React-18-cyan.svg)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-8.3.0-purple.svg)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-blue.svg)](https://tailwindcss.com/)
-[![Tests Passed](https://img.shields.io/badge/Pytest-9%2F9%20Passed-brightgreen.svg)]()
+[![Tests Passed](https://img.shields.io/badge/Pytest-21%2F21%20Passed-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/PromptWars-Competition%20Grade-amber.svg)]()
 
 NyaySetu is an India-focused, GenAI-powered legal information, document intelligence, version comparison, and consultation preparation platform engineered for the **PromptWars Virtual** challenge.

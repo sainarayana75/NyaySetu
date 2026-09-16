@@ -27,6 +27,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'clauses', label: 'Clauses', icon: ShieldCheck },
     { id: 'obligations', label: 'Obligations', icon: UserCheck },
     { id: 'ask', label: 'Ask Document', icon: HelpCircle },
+    { id: 'next_steps', label: 'Next Steps', icon: HelpCircle },
     { id: 'compare', label: 'Compare', icon: GitCompare },
     { id: 'knowledge', label: 'Legal Knowledge', icon: Globe },
     { id: 'lawyer_prep', label: 'Lawyer Prep', icon: FileText },

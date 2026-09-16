@@ -96,29 +96,17 @@ class RAGEngineService:
 
         # Fallback if no matching clauses found
         if not best_answer:
-            if clauses:
-                c = clauses[0]
-                best_answer = f"Here is relevant information from your document:\n**{c.title}**: {c.explanation_en}"
-                matched_sources.append({
-                    "document_id": c.document_id,
-                    "page_number": c.page_number,
-                    "section": c.category,
-                    "clause": c.clause_number,
-                    "source_text": c.original_text,
-                    "why_it_matters": c.why_it_matters
-                })
-            else:
-                return {
-                    "answer": "I couldn't find sufficient information in the provided document to answer this specific question.",
-                    "response_classification": "INSUFFICIENT_EVIDENCE",
-                    "sources": [],
-                    "plain_explanation": "The uploaded document does not contain explicit clauses addressing this query.",
-                    "suggested_followups": [
-                        "What are my obligations under this agreement?",
-                        "What is the monthly rent and deposit?",
-                        "What is the notice period for termination?"
-                    ]
-                }
+            return {
+                "answer": "I couldn't find sufficient information in the provided document.",
+                "response_classification": "INSUFFICIENT_EVIDENCE",
+                "sources": [],
+                "plain_explanation": "The uploaded document does not contain explicit clauses addressing this query.",
+                "suggested_followups": [
+                    "What are my obligations under this agreement?",
+                    "What is the monthly rent and deposit?",
+                    "What is the notice period for termination?"
+                ]
+            }
 
         return {
             "answer": best_answer,
