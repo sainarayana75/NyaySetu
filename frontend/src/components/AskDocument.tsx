@@ -86,7 +86,12 @@ export const AskDocument: React.FC<AskDocumentProps> = ({
       </div>
 
       {/* Messages Scroll Area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div 
+        className="flex-1 overflow-y-auto p-4 space-y-4"
+        aria-live="polite"
+        aria-label="Document Q&A Conversation History"
+        role="log"
+      >
         {messages.map((m) => {
           const isUser = m.sender === 'user';
           return (
@@ -120,7 +125,9 @@ export const AskDocument: React.FC<AskDocumentProps> = ({
                           <span>Page {src.page_number} • {src.clause || src.section || 'Clause'}</span>
                           <button
                             onClick={() => onShowSource(src.page_number, src.source_text)}
-                            className="flex items-center space-x-1 text-amber-700 dark:text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 px-2 py-0.5 rounded border border-amber-500/30 font-bold"
+                            aria-label={`Jump to page ${src.page_number} source clause`}
+                            title="Show source text in document viewer"
+                            className="flex items-center space-x-1 text-amber-700 dark:text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 px-2 py-0.5 rounded border border-amber-500/30 font-bold focus:outline-hidden focus:ring-2 focus:ring-amber-500"
                           >
                             <Eye className="w-3 h-3" />
                             <span>SHOW SOURCE</span>
@@ -156,7 +163,8 @@ export const AskDocument: React.FC<AskDocumentProps> = ({
           <button
             key={idx}
             onClick={() => handleSend(p)}
-            className="bg-white dark:bg-slate-800 hover:bg-blue-50 text-slate-700 dark:text-slate-300 text-[11px] font-medium px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-200 dark:border-slate-700 transition-all"
+            aria-label={`Ask sample question: ${p}`}
+            className="bg-white dark:bg-slate-800 hover:bg-blue-50 text-slate-700 dark:text-slate-300 text-[11px] font-medium px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-200 dark:border-slate-700 transition-all focus:outline-hidden focus:ring-2 focus:ring-blue-500"
           >
             {p}
           </button>
@@ -171,16 +179,20 @@ export const AskDocument: React.FC<AskDocumentProps> = ({
           onChange={(e) => setInputQuery(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSend()}
           placeholder="Ask anything about your uploaded legal document..."
+          aria-label="Ask a question about your uploaded legal document"
           className="flex-1 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500"
         />
         <button
           onClick={() => handleSend()}
           disabled={loading || !inputQuery.trim()}
-          className="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white p-2.5 rounded-xl shadow-xs transition-all"
+          aria-label="Send Question"
+          title="Send Question"
+          className="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white p-2.5 rounded-xl shadow-xs transition-all focus:outline-hidden focus:ring-2 focus:ring-blue-500"
         >
           <Send className="w-4 h-4" />
         </button>
       </div>
+
 
     </div>
   );

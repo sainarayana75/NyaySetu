@@ -64,7 +64,23 @@ NyaySetu is tailored for Indian legal realities without fabricating statutory ma
 
 ---
 
-## ⚡ System Architecture
+## ⚡ System Architecture & Authentic Grounded RAG Pipeline
+
+NyaySetu implements a fully transparent, 10-step evidence-grounded RAG workflow for document Q&A:
+
+```
+UPLOAD DOCUMENT 
+  ├──> 1. Clause & Paragraph Chunking
+  ├──> 2. Page & Section Metadata Enrichment
+  ├──> 3. TF-IDF Vocabulary & Vector Embedding Generation
+  ├──> 4. Cosine Similarity Vector Retrieval & Chunk Ranking
+  ├──> 5. Context Selection & XML Framing (<untrusted_document_context>)
+  ├──> 6. Google Gemini LLM Generation (with fallback grounded synthesis)
+  ├──> 7. Source & Page Preservation (document_id, page_number, clause)
+  ├──> 8. Evidence-Grounded Answer Formatting
+  ├──> 9. Refusal Guardrail ("I couldn't find sufficient information in the provided document.")
+  └──> 10. Prompt-Injection Security Defense
+```
 
 ```mermaid
 flowchart TD
